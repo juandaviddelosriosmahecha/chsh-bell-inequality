@@ -41,17 +41,19 @@ chsh-bell-inequality/
 
 ## Notebook Structure
 
-1. **Introduction & Motivation** — Overview, tools, and significance
-2. **Theoretical foundations** — Bell inequalities, CHSH formulation
-3. **Classical strategy** — 75% limit, formal contradiction proof, Python simulation
-4. **Quantum strategy — theory** — Bell state |Φ⁺⟩, optimal angles, P ≈ 85.36%
-5. **Qiskit implementation** — Circuit construction, measurement rotations
-6. **Simulation results** — Win probabilities, correlations E(x,y), CHSH parameter S
-7. **S vs angle θ analysis** — Angular sweep, theory vs simulation comparison
-8. **Real IBM Quantum hardware** *(optional — requires credentials)* — Execution on ibm_fez
-9. **Noise & transpilation analysis** — Optimization levels 0 / 1 / 2, NISQ impact
-10. **Comparative visualization** — Hardware vs simulator, correlations vs theory
-11. **Conclusions & exercises** — Summary, physical meaning, proposed problems
+- **CHSH Game** — Overview, prison scenario, intuitive game description
+  - **CHSH Game – Classical Case**
+    - Goal (Police Condition) — winning condition a ⊕ b = x · y
+    - Classical Strategy and Its Limitation — formal contradiction proof
+    - Best Classical Strategy — deterministic strategies enumerated
+    - Classical Limit: Maximum Success Probability — 75% upper bound
+  - **CHSH Game – Quantum Case**
+    - Quantum Strategy — Bell state |Φ⁺⟩, optimal angles, P ≈ 85.36%, |S| = 2√2
+    - Qiskit implementation — circuit construction, apply_u_theta, AerSimulator
+    - Simulation results — win probabilities, correlations E(x,y), CHSH parameter S
+    - Real IBM Quantum hardware *(optional — requires credentials)* — ibm_torino, EstimatorV2
+    - Noise & transpilation analysis — optimization levels 0 / 1 / 2, NISQ impact
+    - visualization 
 
 ---
 

@@ -1,7 +1,7 @@
 # CHSH Bell Inequality: Classical vs Quantum Strategies
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19155013.svg)](https://doi.org/10.5281/zenodo.19155013)
 [![Qiskit](https://img.shields.io/badge/Qiskit-2.3.1-6929C4)](https://qiskit.org)
 
 **Author:** Juan David de los Rios Mahecha  
@@ -118,12 +118,11 @@ If you use this work, please cite it as:
   title     = {CHSH Bell Inequality: Classical vs Quantum Strategies},
   year      = {2026},
   publisher = {Zenodo},
-  doi       = {10.5281/zenodo.XXXXXXX},
-  url       = {https://github.com/juandaviddelosriosmahecha/chsh-bell-inequality}
+  doi       = {10.5281/zenodo.19155013},
+  url       = {https://github.com/juandaviddelosriosmahecha/CHSH-bell-inequality}
 }
 ```
 
-> Update the DOI after publishing on Zenodo.
 
 ---
 

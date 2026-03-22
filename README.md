@@ -23,7 +23,7 @@ The work combines theoretical insight and experimental implementation, showing h
 | Classical (best possible) | 75% | ≤ 2 |
 | Quantum (theoretical) | ≈ 85.36% | 2√2 ≈ 2.828 |
 | Quantum (simulated) | ≈ 85.35% | 2.828 |
-| Quantum (IBM hardware) | ≈ 86.49% | 2.919 |
+| Quantum (IBM hardware) | ≈ 85.20% | 2.828 |
 
 ---
 

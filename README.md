@@ -76,14 +76,18 @@ This demonstrates that quantum correlations **cannot be explained by any local h
 pip install -r requirements.txt
 ```
 
-Or install manually:
+Or install manually (same pinned versions as `requirements.txt`):
 
 ```bash
-pip install qiskit==2.3.1 qiskit-aer==0.17.2 qiskit-ibm-runtime matplotlib numpy
+pip install qiskit==2.3.1 qiskit-aer==0.17.2 qiskit-ibm-runtime==0.45.1 \
+            matplotlib==3.10.0 numpy==2.0.2 scipy==1.16.3 pylatexenc==2.10
 ```
 
-> **Note:** Section 8 (real hardware) requires valid IBM Quantum credentials.  
-> All other sections run fully on the local Aer simulator.
+Requires **Python 3.9+** and Jupyter (or Google Colab).
+
+> **Note:** The real-hardware section (IBM Quantum) requires valid IBM Quantum
+> credentials configured via `QiskitRuntimeService`. All other sections run fully
+> on the local Aer simulator with no account needed.
 
 ---
 
@@ -128,6 +132,6 @@ If you use this work, please cite it as:
 
 ## License
 
-This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.com/licenses/by/4.0/).
+This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
 
 You are free to share and adapt this material for any purpose, provided you give appropriate credit to the original author.

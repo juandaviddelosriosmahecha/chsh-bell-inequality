@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# Testing / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.ruff_cache/
+.mypy_cache/
+
+# Credentials — never commit IBM Quantum tokens
+.env
+*.token
+qiskit-ibm.json
+
+# Generated experimental artifacts (raw data is tracked selectively, not blanket)
+data/raw/**/*.json
+data/raw/**/*.csv
+data/processed/**/*.json
+results/figures/*.png
+results/figures/*.pdf
+results/figures/*.svg
+results/tables/*.csv
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store

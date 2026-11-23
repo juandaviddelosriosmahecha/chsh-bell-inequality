@@ -1,0 +1,6 @@
+# Ideal, noise-free CHSH baseline (Experiment A).
+mode: ideal
+state: phi_plus
+shots: 8192
+seed: 42
+exact: false        # true -> analytic probabilities, no sampling

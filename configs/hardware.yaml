@@ -1,0 +1,9 @@
+# Real IBM Quantum hardware run (Experiment A/F). Requires credentials in .env.
+mode: hardware
+state: phi_plus
+shots: 5000
+optimization_level: 1
+backend: null          # null -> least_busy operational device; or e.g. ibm_torino
+output_dir: data/raw
+# Credentials are read from environment variables, never from this file:
+#   IBM_QUANTUM_TOKEN, IBM_QUANTUM_INSTANCE, IBM_QUANTUM_BACKEND

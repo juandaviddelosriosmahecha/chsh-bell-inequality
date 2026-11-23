@@ -1,137 +1,111 @@
-# CHSH Bell Inequality: Classical vs Quantum Strategies
+# Beyond CHSH
+
+**Experimental Correlator-Level Analysis of Quantum Randomness under Superconducting Hardware Noise**
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19155013.svg)](https://doi.org/10.5281/zenodo.19155013)
-[![Qiskit](https://img.shields.io/badge/Qiskit-2.3.1-6929C4)](https://qiskit.org)
 
-**Author:** Juan David de los Rios Mahecha  
-**Role:** Qiskit Advocate  
-**Topic:** Quantum Nonlocality / Bell Inequalities  
+**Author:** Juan David de los Rios Mahecha
 
 ---
 
-## Overview
+## Scientific objective
 
-This notebook presents a complete study of the **CHSH (Clauser–Horne–Shimony–Holt) game** as a fundamental framework to explore quantum nonlocality and the limits of classical correlations.
+What statistical information is lost when a Bell experiment is summarised by the
+single CHSH value `S`? This project studies whether **full joint distributions**
+`P(a,b|x,y)` and **per-correlator analysis** add experimental or cryptographic
+information beyond `S`, under clearly defined noise and trust models. The
+hypotheses (H1–H4 in [`docs/methodology.md`](docs/methodology.md)) are tested,
+not assumed; a null result is a valid outcome.
 
-The work combines theoretical insight and experimental implementation, showing how quantum entanglement enables correlations that surpass any classical strategy.
+## Project status
 
-### Key Results
+Research platform, version 2.0.0. It grew out of the v1.0.0 CHSH-game notebook
+(preserved at tag `v1.0.0` and in [`notebooks/CHSH_Game.ipynb`](notebooks/CHSH_Game.ipynb))
+and refactors the validated physics into a tested, modular package while adding
+the "Beyond CHSH" analysis (distributions, marginals, distances, entropy, noise
+sweeps, hardware integration).
 
-| Strategy | Win Probability | CHSH value \|S\| |
-|----------|----------------|-----------------|
-| Classical (best possible) | 75% | ≤ 2 |
-| Quantum (theoretical) | ≈ 85.36% | 2√2 ≈ 2.828 |
-| Quantum (simulated) | ≈ 85.35% | 2.828 |
-| Quantum (IBM hardware) | ≈ 85.20% | 2.828 |
-
----
-
-## Contents
-
-```
-chsh-bell-inequality/
-├── CHSH_Game.ipynb        # Main notebook
-├── requirements.txt       # Python dependencies
-├── LICENSE                # CC BY 4.0
-└── README.md
-```
-
----
-
-## Notebook Structure
-
-- **CHSH Game** — Overview, prison scenario, intuitive game description
-  - **CHSH Game – Classical Case**
-    - Goal (Police Condition) — winning condition a ⊕ b = x · y
-    - Classical Strategy and Its Limitation — formal contradiction proof
-    - Best Classical Strategy — deterministic strategies enumerated
-    - Classical Limit: Maximum Success Probability — 75% upper bound
-  - **CHSH Game – Quantum Case**
-    - Quantum Strategy — Bell state |Φ⁺⟩, optimal angles, P ≈ 85.36%, |S| = 2√2
-    - Qiskit implementation — circuit construction, apply_u_theta, AerSimulator
-    - Simulation results — win probabilities, correlations E(x,y), CHSH parameter S
-    - Real IBM Quantum hardware *(optional — requires credentials)* — ibm_torino, EstimatorV2
-    - Noise & transpilation analysis — optimization levels 0 / 1 / 2, NISQ impact
-    - visualization 
-
----
-
-## Quantum Strategy
-
-If Alice and Bob share the Bell state |Φ⁺⟩ and measure at optimal angles:
-
-- **Alice:** 0, π/4  
-- **Bob:** π/8, −π/8
-
-They achieve a winning probability of **(2 + √2) / 4 ≈ 85.36%**, violating the classical CHSH bound with **|S| = 2√2**.
-
-This demonstrates that quantum correlations **cannot be explained by any local hidden variable theory**.
-
----
-
-## Requirements
+## Installation
 
 ```bash
-pip install -r requirements.txt
+pip install -e ".[dev]"        # core (numpy/scipy/matplotlib) + test tools
+pip install -e ".[quantum]"    # optional: Qiskit backends for simulation/hardware
 ```
 
-Or install manually (same pinned versions as `requirements.txt`):
+The scientific core depends only on numpy/scipy and installs/tests without
+Qiskit. See [`requirements.txt`](requirements.txt) for the pinned Colab setup.
+
+## Running simulations
 
 ```bash
-pip install qiskit==2.3.1 qiskit-aer==0.17.2 qiskit-ibm-runtime==0.45.1 \
-            matplotlib==3.10.0 numpy==2.0.2 scipy==1.16.3 pylatexenc==2.10
+beyond-chsh baseline --exact                 # analytic CHSH baseline (no Qiskit)
+beyond-chsh baseline --shots 8192 --seed 42  # finite-shot Aer simulation
+beyond-chsh noise-sweep --param depolarizing --points 11
 ```
 
-Requires **Python 3.9+** and Jupyter (or Google Colab).
+## Running on IBM Quantum (optional)
 
-> **Note:** The real-hardware section (IBM Quantum) requires valid IBM Quantum
-> credentials configured via `QiskitRuntimeService`. All other sections run fully
-> on the local Aer simulator with no account needed.
-
----
-
-## Usage
-
-Open the notebook in Google Colab or locally:
+Requires credentials in `.env` and the `quantum` extra. See
+[`docs/hardware.md`](docs/hardware.md).
 
 ```bash
-git clone https://github.com/juandaviddelosriosmahecha/chsh-bell-inequality.git
-cd chsh-bell-inequality
-jupyter notebook CHSH_Game.ipynb
+beyond-chsh hardware --backend ibm_torino --shots 5000
 ```
 
-Or open directly in Colab:  
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/juandaviddelosriosmahecha/chsh-bell-inequality/blob/main/CHSH_Game.ipynb)
+Simulated runs are never labelled as hardware; every hardware run records job
+ids, backend, shots, transpiled depth, and calibration metadata.
 
----
+## Code organisation
 
-## Illustrations
+```
+src/beyond_chsh/
+  circuits/   bell_states, measurements, chsh        (Qiskit, lazy-imported)
+  theory/     probabilities, correlators, bell_inequalities, entropy  (numpy only)
+  backends/   ideal, noisy, ibm_runtime
+  noise/      channels, characterization
+  analysis/   statistics, comparisons, visualization
+  data/       schemas, storage                        (reproducible records)
+  cli.py
+experiments/  baseline, noise_sweep, correlator_analysis, entropy_analysis, hardware_validation
+tests/        unit, integration (Qiskit), physics
+docs/         theory, methodology, hardware, reproducibility
+paper/        manuscript.tex, references.bib
+```
 
-All hand-drawn illustrations in this notebook were created by **Juan David de los Rios Mahecha** and are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+## Reproducing figures and results
 
----
+Analyses re-run from stored raw data without touching hardware; see
+[`docs/reproducibility.md`](docs/reproducibility.md). Figures export to PNG plus
+a vector format into `results/figures/`.
+
+## Experimental limitations
+
+Conventional IBM Quantum hardware does **not** satisfy device-independent
+security assumptions (trusted lab, open loopholes, finite statistics). The DI
+min-entropy bound is provided for theoretical comparison only, not as a
+cryptographic guarantee. See [`docs/methodology.md`](docs/methodology.md).
+
+## References
+
+CHSH (1969), Tsirelson (1980), Pironio et al. (2010), Acín & Masanes (2016) —
+full entries in [`paper/references.bib`](paper/references.bib).
 
 ## Citation
 
-If you use this work, please cite it as:
+See [`CITATION.cff`](CITATION.cff).
 
 ```bibtex
 @software{delosrios_chsh_2026,
   author    = {de los Rios Mahecha, Juan David},
-  title     = {CHSH Bell Inequality: Classical vs Quantum Strategies},
+  title     = {Beyond CHSH: Experimental Correlator-Level Analysis of Quantum Randomness under Superconducting Hardware Noise},
   year      = {2026},
   publisher = {Zenodo},
   doi       = {10.5281/zenodo.19155013},
-  url       = {https://github.com/juandaviddelosriosmahecha/CHSH-bell-inequality}
+  url       = {https://github.com/juandaviddelosriosmahecha/chsh-bell-inequality}
 }
 ```
 
-
----
-
 ## License
 
-This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
-
-You are free to share and adapt this material for any purpose, provided you give appropriate credit to the original author.
+[Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/).

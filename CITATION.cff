@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+title: "Beyond CHSH: Experimental Correlator-Level Analysis of Quantum Randomness under Superconducting Hardware Noise"
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - family-names: "de los Rios Mahecha"
+    given-names: "Juan David"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.19155013
+repository-code: "https://github.com/juandaviddelosriosmahecha/chsh-bell-inequality"
+license: CC-BY-4.0
+version: 2.0.0
+keywords:
+  - quantum information
+  - Bell inequality
+  - CHSH
+  - quantum randomness
+  - superconducting qubits

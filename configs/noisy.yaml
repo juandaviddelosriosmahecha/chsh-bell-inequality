@@ -1,0 +1,14 @@
+# Controlled-noise simulation (Experiment C).
+mode: noisy
+state: phi_plus
+shots: 8192
+seed: 42
+noise:
+  depolarizing: 0.02
+  readout_error: 0.01
+  amplitude_damping: 0.0
+  phase_damping: 0.0
+sweep:
+  param: depolarizing   # one of: depolarizing, readout_error, amplitude_damping, phase_damping
+  max: 0.5
+  points: 11
